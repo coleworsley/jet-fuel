@@ -3,7 +3,7 @@ $('#url-submit').on('click', (e) => {
 
   const val = $('#url-input').val();
 
-  fetch('api/v1/shorten', {
+  fetch('http://localhost:3000/api/v1/shorten', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -13,4 +13,12 @@ $('#url-submit').on('click', (e) => {
   .then(res => res.json())
   .then(data => console.log(data))
   .catch(err => console.log(err));
+})
+
+$('#new-folder-submit').on('click', (e) => {
+  e.preventDefault();
+
+  fetch('http://localhost:3000')
+  .then(res => res.json())
+  .then(data => console.log(data))
 })
