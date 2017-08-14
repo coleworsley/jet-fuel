@@ -1,3 +1,38 @@
-h1 {
-  color: blue;
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  min-height: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 40px;
+  background-color: #EC5C37;
+}
+
+.title {
+  color: #FFF;
+}
+
+main {
+  display: flex;
+  height: 100%;
+}
+
+.folders {
+  width: 33.333%;
+}
+
+.links {
+  width: 66.666%;
+  background-color: lightgrey;
 }
