@@ -6,7 +6,6 @@ const path = require('path');
 app.use(express.static('public'));
 
 app.post('/api/v1/shorten', (req, res) => {
-  console.log('in shorten')
   res.status(200).json({ "data":"hello" })
 })
 
