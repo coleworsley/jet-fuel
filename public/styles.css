@@ -11,7 +11,7 @@ body {
   font-family: sans-serif;
 }
 
-h3 {
+h1, h3, p {
   margin: 0;
 }
 
@@ -21,18 +21,16 @@ header {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: #EC5C37;
+  background-color: #2e4dbe;
 }
 
 .title {
   color: #FFF;
+  margin-bottom: 10px;
 }
 
 #title-span {
   height: 30px;
-}
-
-.inputs {
 }
 
 .inputs,
@@ -44,6 +42,10 @@ header {
   flex-direction: column;
 }
 
+.folder-select {
+  margin-bottom: 10px;
+}
+
 .folder-dropdown {
   width: 200px;
   border-radius: 5px;
@@ -52,24 +54,27 @@ header {
 #new-folder-submit,
 #url-submit,
 #new-folder-input,
-#url-input {
+#url-input,
+#folder-dropdown {
   border: none;
   padding: 5px;
   margin: 5px;
   border-radius: 5px;
 }
 
+#new-folder-input,
+#url-input {
+  width: 50%;
+  min-width: 220px;
+}
+
 .new-folder-form,
 .url-form {
   max-width: 500px;
   width: 50%;
+  min-width: 320px;
   display: flex;
   justify-content: center;
-}
-
-#new-folder-input,
-#url-input {
-  width: 50%;
 }
 
 main {
@@ -87,16 +92,20 @@ main {
   padding: 10px;
 }
 
+.sub-title {
+  margin-bottom: 10px;
+}
+
 .folder {
   display: block;
   width: 100%;
-  height: 25px;
+  height: 30px;
   font-size: 18px;
   text-align: left;
   padding: 0 10px;
   background-image: url('assets/images/arrow.svg');
   background-size: 20px;
-  background-position: right 10px top 2.5px;
+  background-position: right 10px top 5px;
   background-repeat: no-repeat;
   border: none;
 }
