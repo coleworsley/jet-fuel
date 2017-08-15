@@ -9,40 +9,50 @@
   </head>
   <body>
     <header>
-      <h1 class="title">Jet Fuel</h1>
-      <div class="folder-select">
-        <label for="folder-dropdown">Select a folder or add a new folder</label>
-        <select class="folder-dropdown" name="folder-dropdown">
-          <option value="new-folder">Add New Folder</option>
-          <option>People</option>
-          <option>Places</option>
-        </select>
-        <form class="new-folder-form">
-          <input
+      <h1 class="title">
+        Jet
+        <span>
+          <img src="assets/images/fighter-jet.png" id="title-span">
+        </span>
+        Fuel
+      </h1>
+      <div class="inputs">
+        <div class="folder-select">
+          <label for="folder-dropdown">Select a folder or add a new folder</label>
+          <select class="folder-dropdown" name="folder-dropdown">
+            <option value="new-folder">Add New Folder</option>
+            <option>People</option>
+            <option>Places</option>
+          </select>
+          <form class="new-folder-form">
+            <input
             id="new-folder-input"
             type="text"
             placeholder="Enter a Folder Name"
             name="new-folder-input">
-          <input
+            <input
             id="new-folder-submit"
             type="submit"
             name="new-folder-submit">
-        </form>
-      </div>
+          </form>
+        </div>
 
-      <form class="url-form">
-        <input
+        <form class="url-form">
+          <input
           id="url-input"
           type="text"
           placeholder="Enter a Url"
           name="url-input">
-        <input
+          <input
           id="url-submit"
           type="submit"
           name="shorten-btn">
-      </form>
+        </form>
+
+      </div>
 
     </header>
+
     <main>
       <section class="folders">
         <h3>Folders</h3>
@@ -53,7 +63,17 @@
         </div>
       </section>
       <section class="links">
-
+        <h3>People</h3>
+        <div class="link-container">
+          <div class="link">
+            <a href="somewhere">somewhere</a>
+            <p>Date Created: 8/15/2017</p>
+          </div>
+          <div class="link">
+            <a href="somewhere">somewhere</a>
+            <p>Date Created: 8/15/2017</p>
+          </div>
+        </div>
       </section>
     </main>
   </body>
