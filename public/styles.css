@@ -11,8 +11,12 @@ body {
   font-family: sans-serif;
 }
 
+h3 {
+  margin: 0;
+}
+
 header {
-  height: 180px;
+  height: 200px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -25,34 +29,77 @@ header {
 }
 
 #title-span {
-  height: 50px;
+  height: 30px;
+}
+
+.inputs {
 }
 
 .inputs,
 .folder-select {
-  background-color: red;
+  width: 100%;
   display: flex;
   justify-content: space-around;
   align-items: center;
   flex-direction: column;
 }
 
+.folder-dropdown {
+  width: 200px;
+  border-radius: 5px;
+}
+
+#new-folder-submit,
+#url-submit,
+#new-folder-input,
+#url-input {
+  border: none;
+  padding: 5px;
+  margin: 5px;
+  border-radius: 5px;
+}
+
+.new-folder-form,
+.url-form {
+  max-width: 500px;
+  width: 50%;
+  display: flex;
+  justify-content: center;
+}
+
+#new-folder-input,
+#url-input {
+  width: 50%;
+}
+
 main {
   display: flex;
-  min-height: calc(100vh - 180px);
+  min-height: calc(100vh - 200px);
 }
 
 .folders {
   width: 33.333%;
+  background-color: blue;
+}
+
+.folders,
+.links {
+  padding: 10px;
 }
 
 .folder {
+  display: block;
+  width: 100%;
+  height: 25px;
+  font-size: 18px;
+  text-align: left;
+  padding: 0 10px;
   background-image: url('assets/images/arrow.svg');
-  background-size: 30px;
-  background-position: center;
+  background-size: 20px;
+  background-position: right 10px top 2.5px;
   background-repeat: no-repeat;
+  border: none;
 }
-
 
 .links {
   width: 66.666%;
