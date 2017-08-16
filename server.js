@@ -32,10 +32,11 @@ app.route('/api/v1/folders')
 
 app.route('/api/v1/folders/:id/links')
 .get((req, res) => {
-  db('folders')
+  db('links')
   .select()
-  .where('id', req.params.id)
-  .then(links => res.status(200).json(links))
+  .where('folder_id', req.params.id)
+  .then(links => {
+    return res.status(200).json(links)})
   .catch(error => res.status(404).json(error))
 })
 .post((req, res) => {
