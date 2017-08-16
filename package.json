@@ -18,8 +18,10 @@
   },
   "homepage": "https://github.com/coleworsley/jet-fuel#readme",
   "dependencies": {
+    "body-parser": "^1.17.2",
     "express": "^4.15.4",
     "express-cors": "0.0.3",
-    "knex": "^0.13.0"
+    "knex": "^0.13.0",
+    "pg": "^7.1.2"
   }
 }
