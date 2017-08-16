@@ -62,7 +62,7 @@ $('.folder-container').on('click', '.folder', (e) => {
   .then(links => {
     $('.link-container').append(links.map(link => (
       `<div class="link">
-        <a href=${link.id} value=${link.id}>http://uniqueid:${link.id}</a>
+        <a value=${link.id} href="api/v1/links/${link.id}" id="link">http://uniqueid:${link.id}</a>
         <p>Date Created: ${link.created_at}</p>
       </div>`
     )))
