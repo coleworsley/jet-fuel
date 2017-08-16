@@ -25,7 +25,7 @@ app.route('/api/v1/folders')
   .insert(req.body, 'id')
   .then(id => {
     const folder_id = id[0];
-    return res.status(201).json({ folder_id });
+    return res.status(201).json(folder_id);
   })
   .catch(error => res.status(500).json(error))
 })
@@ -39,7 +39,7 @@ app.route('/api/v1/folders/:id/links')
   .catch(error => res.status(404).json(error))
 })
 .post((req, res) => {
-  const link = Object.assign({}, req.body, { folder_id: req.params.id });
+  const link = Object.assign({}, req.body, { folder_id: req.params.id, short_url: 'test' });
 
   db('links')
   .insert(link, 'id')
@@ -48,13 +48,6 @@ app.route('/api/v1/folders/:id/links')
     return res.status(201).json({ link_id })
   })
   .catch(error => res.status(404).json(error))
-})
-
-
-app.post('/api/v1/folders/:id/links', (req, res) => {
-  // request.params
-  db('links').select(req.params.id)
-  res.status(200).json({ "data":"hello", params: req.params })
 })
 
 app.listen(port, () => {
