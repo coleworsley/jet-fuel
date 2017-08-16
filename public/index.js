@@ -51,6 +51,24 @@ $('#url-submit').on('click', (e) => {
 
 })
 
+$('.folder-container').on('click', '.folder', (e) => {
+  $('.link-container').empty();
+
+  console.log(e.target.textContent);
+  $('#links-title').text(e.target.textContent)
+
+  fetch(`api/v1/folders/${e.target.value}/links`)
+  .then(res => res.json())
+  .then(links => {
+    $('.link-container').append(links.map(link => (
+      `<div class="link">
+        <a href=${link.id} value=${link.id}>http://uniqueid:${link.id}</a>
+        <p>Date Created: ${link.created_at}</p>
+      </div>`
+    )))
+  })
+})
+
 
 $('.folder-dropdown').on('click', (e) => {
   console.log($('.folder-dropdown').find(':selected').text())
