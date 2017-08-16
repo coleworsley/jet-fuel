@@ -1,3 +1,19 @@
+const fetchFolders = () => {
+  fetch('api/v1/folders')
+  .then(res => res.json())
+  .then(folders => appendFolders(folders))
+  .catch(error => appendFolders(error))
+}
+fetchFolders();
+
+const appendFolders = (folders) => {
+  $('.folder-container').append(folders.map(folder => (
+    `<button class="folder" value=${folder.id}>${folder.name}</button>`
+  )))
+}
+
+
+
 $('#url-submit').on('click', (e) => {
   e.preventDefault();
 
