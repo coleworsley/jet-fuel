@@ -23,10 +23,7 @@ app.route('/api/v1/folders')
 .post((req, res) => {
   db('folders')
   .insert(req.body, 'id')
-  .then(id => {
-    const folder_id = id[0];
-    return res.status(201).json(folder_id);
-  })
+  .then(id => res.status(201).json(id[0]))
   .catch(error => res.status(500).json(error))
 })
 
@@ -48,6 +45,15 @@ app.route('/api/v1/folders/:id/links')
     const link_id = id[0];
     return res.status(201).json({ link_id })
   })
+  .catch(error => res.status(404).json(error))
+})
+
+app.route('/api/v1/links/:id')
+.get((req, res) => {
+  db('links')
+  .select()
+  .where('id', req.params.id)
+  .then(link => res.redirect(link[0].original_url))
   .catch(error => res.status(404).json(error))
 })
 
