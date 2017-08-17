@@ -5,142 +5,121 @@
 html,
 body {
   width: 100%;
-  min-height: 100%;
+  min-height: 100vh;
   padding: 0;
   margin: 0;
   font-family: sans-serif;
   background-color: rgb(229, 230, 227);
 }
 
-h1, h3, p {
+h1, h2, h3, p {
   margin: 0;
 }
 
-header {
-  height: 200px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background-color: #2e4dbe;
+select{
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
 }
 
+*:focus {
+  outline: none;
+}
+
+
+/*==============
+=====Header=====
+================*/
+
+header {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  background-color: rgb(233, 91, 38);
+  padding: 10px;
+}
+
+/*Title*/
 .title {
-  color: #FFF;
-  margin-bottom: 10px;
+  font-size: 72px;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 #title-span {
-  height: 30px;
+  height: 70px;
 }
 
+/*Inputs*/
 .inputs {
+  height: 50%;
   width: 80%;
+  max-width: 600px;
+  padding: 10px;
   display: flex;
-  justify-content: space-around;
-  align-items: center;
   flex-direction: column;
+  justify-content: space-around;
 }
 
 .folder-select {
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 10px;
-}
-
-.folder-select,
-.new-folder-form,
-.url-form {
-  width: 100%;
   display: flex;
+  flex-direction: column;
   justify-content: center;
 }
 
-
-select{
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    padding: 5px;
+.folder-dropdown,
+#new-folder-input,
+#url-input,
+#new-folder-submit,
+#url-submit {
+  padding: 10px;
+  margin: 0;
+  margin-bottom: 10px;
+  border: none;
+  border-style: solid;
+  border-color: rgb(126, 211, 223);
+  border-width: 2px;
+  transition: all .5s;
 }
 
 .folder-dropdown {
-  width: 100%;
-  border-radius: 5px;
+  cursor: pointer;
 }
 
-#new-folder-submit,
-#url-submit,
-#new-folder-input,
-#url-input,
-#folder-dropdown {
-  border: none;
-  padding: 5px;
-  border-radius: 5px;
-  margin-bottom: 10px;
+.new-folder-form,
+.url-form {
+  display: flex;
+  flex-direction: row-reverse;
 }
 
 #new-folder-input,
 #url-input {
   width: 80%;
-  min-width: 220px;
-  margin-right: 10px;
+  border-radius: 5px 0 0 5px;
+  border-width: 2px 0 2px 2px;
 }
 
-#url-submit,
-#new-folder-submit {
+#new-folder-submit,
+#url-submit {
   width: 20%;
-}
-
-.new-folder-form,
-.url-form {
-
-}
-
-main {
-  display: flex;
-  min-height: calc(100vh - 200px);
-}
-
-.folders {
-  width: 33.333%;
-}
-
-.folders,
-.links {
-  padding: 10px;
-}
-
-.sub-title {
-  margin-bottom: 10px;
-}
-
-.folder {
-  display: block;
-  width: 100%;
-  height: 30px;
-  font-size: 18px;
-  text-align: left;
-  padding: 0 10px;
-  background: #848fb5;
-  background-image: url('assets/images/arrow.svg');
-  background-size: 20px;
-  background-position: right 10px top 5px;
-  background-repeat: no-repeat;
-  box-shadow: 2px 2px 5px rgb(80, 80, 80);
+  border-radius: 0 5px 5px 0;
+  background-color: rgb(126, 211, 223);
+  border-width: 2px 2px 2px 0;
   cursor: pointer;
-  border: none;
-  margin: 10px 0;
-  transition: all .5s;
 }
 
-.folder:hover {
-  transform: scale(1.05);
-  background-color: rgb(12, 31, 130);
-  color: #FFF;
+#new-folder-submit:hover,
+#url-submit:hover {
+  background-color: rgb(29, 134, 149);
+  border-color: rgb(29, 134, 149);
+  color: #fff;
 }
 
-.links {
-  width: 66.666%;
-  /*background-color: lightgrey;*/
+#new-folder-submit:hover + #new-folder-input,
+#url-submit:hover + #url-input,
+.folder-dropdown:hover {
+  border-color: rgb(29, 134, 149);
 }
