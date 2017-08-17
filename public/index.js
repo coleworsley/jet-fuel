@@ -16,6 +16,8 @@ const appendFolders = (folders) => {
 fetchFolders();
 
 // Event Listeners
+$('.folder-dropdown')
+
 $('#new-folder-submit').on('click', (e) => {
   e.preventDefault();
   const name = $('#new-folder-input').val();
@@ -29,8 +31,8 @@ $('#new-folder-submit').on('click', (e) => {
   })
   .then(res => res.json())
   .then(id => {
-    appendFolders([{ id, name }])
-    $('.folder-dropdown').val(id)
+    appendFolders([{ id, name }]);
+    $('.folder-dropdown').val(id);
   })
   .catch(error => console.log(error))
 })
@@ -70,8 +72,18 @@ $('.folder-container').on('click', '.folder', (e) => {
 })
 
 
-$('.folder-dropdown').on('click', (e) => {
-  console.log($('.folder-dropdown').find(':selected').text())
+$('.folder-dropdown').on('change', (e) => {
+  console.log(e.target.value === 'new-folder')
+
+  if (e.target.value !== 'new-folder') {
+    $('.new-folder-form').addClass('form-hidden');
+    $('.url-form').removeClass('form-hidden');
+  } else {
+    $('.url-form').addClass('form-hidden')
+    $('.new-folder-form').removeClass('form-hidden')
+  }
+
+  $(e.target).find(':selected').text()
 })
 
 // $('#url-submit').on('click', (e) => {
