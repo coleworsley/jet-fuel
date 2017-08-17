@@ -4,7 +4,6 @@ const fetchFolders = () => {
   .then(folders => appendFolders(folders))
   .catch(error => appendFolders(error))
 }
-fetchFolders();
 
 const folderButton = folder => `<button class="folder" value=${folder.id}>${folder.name}</button>`;
 const folderDropdown = folder => `<option value=${folder.id}>${folder.name}</option>`;
@@ -13,7 +12,10 @@ const appendFolders = (folders) => {
   $('.folder-dropdown').append(folders.map(folderDropdown));
 }
 
-//  Event Listeners
+// Page Load
+fetchFolders();
+
+// Event Listeners
 $('#new-folder-submit').on('click', (e) => {
   e.preventDefault();
   const name = $('#new-folder-input').val();

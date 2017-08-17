@@ -3,6 +3,7 @@ const app = express();
 const port = (process.env.PORT || 3000);
 const path = require('path');
 const bodyParser = require('body-parser');
+const moment = require('moment');
 
 const env = process.env.NODE_ENV || 'development';
 const config = require('./knexfile')[env];
@@ -33,7 +34,12 @@ app.route('/api/v1/folders/:id/links')
   .select()
   .where('folder_id', req.params.id)
   .then(links => {
-    return res.status(200).json(links)})
+    const updatedLinks = links.map(link => {
+      const created_at = new Date(link.created_at).toDateString();
+      return Object.assign({}, link, { created_at });
+    })
+    return res.status(200).json(updatedLinks)
+  })
   .catch(error => res.status(404).json(error))
 })
 .post((req, res) => {
