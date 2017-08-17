@@ -23,10 +23,7 @@ app.route('/api/v1/folders')
 .post((req, res) => {
   db('folders')
   .insert(req.body, 'id')
-  .then(id => {
-    const folder_id = id[0];
-    return res.status(201).json(folder_id);
-  })
+  .then(id => res.status(201).json(id[0]))
   .catch(error => res.status(500).json(error))
 })
 
@@ -56,14 +53,9 @@ app.route('/api/v1/links/:id')
   db('links')
   .select()
   .where('id', req.params.id)
-  .then(link => {
-    console.log(link[0].original_url);
-    return res.redirect(link[0].original_url)
-  })
+  .then(link => res.redirect(link[0].original_url))
   .catch(error => res.status(404).json(error))
 })
-
-
 
 app.listen(port, () => {
   console.log(`App is listening on http://localhost:${port}`)

@@ -53,8 +53,6 @@ $('#url-submit').on('click', (e) => {
 
 $('.folder-container').on('click', '.folder', (e) => {
   $('.link-container').empty();
-
-  console.log(e.target.textContent);
   $('#links-title').text(e.target.textContent)
 
   fetch(`api/v1/folders/${e.target.value}/links`)
