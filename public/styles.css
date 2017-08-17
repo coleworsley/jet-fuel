@@ -176,3 +176,9 @@ main {
 .folder:active {
   background-color: rgb(233, 91, 38);
 }
+
+
+/*Links*/
+.link {
+  padding: 10px;
+}
