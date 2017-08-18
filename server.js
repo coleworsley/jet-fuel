@@ -66,3 +66,5 @@ app.route('/api/v1/links/:id')
 app.listen(port, () => {
   console.log(`App is listening on http://localhost:${port}`)
 })
+
+module.exports = app;
