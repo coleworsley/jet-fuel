@@ -1,4 +1,5 @@
-const knex = require('../knex');
+const config = require('../knexfile')['test'];
+const knex = require('knex')(config);
 const chai = require('chai');
 const should = chai.should();
 const chaiHttp = require('chai-http');
@@ -20,9 +21,7 @@ describe('Client Routes', () => {
 
 describe('API Routes', () => {
   before(done => {
-    knex.migrate.rollback()
-    .then(() => knex.migrate.latest())
-    .then(() => done())
+    knex.migrate.latest().then(() => done())
   });
 
   beforeEach(done => {

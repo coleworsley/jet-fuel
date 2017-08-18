@@ -45,19 +45,15 @@ app.get('/api/v1/folders/:id/links', (req, res) => {
 })
 
 app.post('/api/v1/folders/:id/links', (req, res) => {
-  console.log('in post')
   const link = Object.assign({}, req.body, {
     folder_id: parseInt(req.params.id),
     short_url: 'placeholder'
   });
   db('folders').select().then((data) => {
-    console.log(data)
-    console.log(link);
     db('links')
     .insert(link, 'id')
     .then(id => res.status(201).json(id[0]))
     .catch(error => {
-      console.log('why the fuck is there an error?');
       res.status(404).json(error)
     })
   })
