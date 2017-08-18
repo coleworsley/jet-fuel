@@ -3,15 +3,10 @@ const app = express();
 const port = (process.env.PORT || 3000);
 const path = require('path');
 const bodyParser = require('body-parser');
-const moment = require('moment');
-
-const env = process.env.NODE_ENV || 'development';
-const config = require('./knexfile')[env];
-const db = require('knex')(config);
+const db = require('./knex')
 
 app.use(bodyParser.json());
 app.use(express.static('public'));
-
 
 app.route('/api/v1/folders')
 .get((req, res) => {
@@ -43,13 +38,13 @@ app.route('/api/v1/folders/:id/links')
   .catch(error => res.status(404).json(error))
 })
 .post((req, res) => {
-  const link = Object.assign({}, req.body, { folder_id: req.params.id, short_url: 'test' });
+  const link = Object.assign({}, req.body, { folder_id: req.params.id, short_url: 'placeholder' });
 
   db('links')
   .insert(link, 'id')
   .then(id => {
     const link_id = id[0];
-    return res.status(201).json({ link_id })
+    return res.status(201).json(link_id)
   })
   .catch(error => res.status(404).json(error))
 })
@@ -66,3 +61,5 @@ app.route('/api/v1/links/:id')
 app.listen(port, () => {
   console.log(`App is listening on http://localhost:${port}`)
 })
+
+module.exports = app;

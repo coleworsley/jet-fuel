@@ -1,5 +1,4 @@
 // Function declarations
-
 const fetchFolders = () => {
   fetch('api/v1/folders')
   .then(res => res.json())
@@ -43,7 +42,6 @@ const handleNewFolderSubmit = e => {
 
 const handleLinkSubmit = e => {
   e.preventDefault();
-
 
   const original_url = $('#url-input').val();
   const folder_id = $('.folder-dropdown').val();
@@ -91,7 +89,6 @@ const handleFolderDropdown = e => {
     $('.new-folder-form').removeClass('form-hidden')
   }
 }
-
 
 // Page Load
 fetchFolders();
