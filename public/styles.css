@@ -195,7 +195,8 @@ main {
   background-color: rgb(231, 141, 107);
 }
 
-.folder:active {
+.folder:active,
+.active-folder {
   background-color: rgb(233, 91, 38);
 }
 
