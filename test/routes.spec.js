@@ -18,21 +18,16 @@ describe('Client Routes', () => {
   })
 })
 
-
 describe('API Routes', () => {
   before(done => {
     knex.migrate.rollback()
     .then(() => knex.migrate.latest())
-    .then(() => {
-      done();
-    })
+    .then(() => done())
   });
 
   beforeEach(done => {
     knex.seed.run()
-    .then(() => {
-      done();
-    })
+    .then(() => done())
   });
 
   describe('GET /api/v1/folders', () => {
@@ -90,8 +85,50 @@ describe('API Routes', () => {
         res.should.have.status(200);
         res.body.should.be.a('array');
         res.body.length.should.equal(2);
+        res.body[0].should.have.property('id');
+        res.body[0].id.should.equal(1);
+        res.body[0].should.have.property('original_url');
+        res.body[0].original_url.should.equal('http://www.ticketmaster.com/section/concerts');
+        res.body[0].should.have.property('short_url');
+        res.body[0].short_url.should.equal('placeholder');
+        res.body[0].should.have.property('folder_id');
+        res.body[0].folder_id.should.equal(1);
         done();
       });
+    });
+  });
+
+  describe('POST /api/v1/folders/:id/links', () => {
+    it('should post a link to a folder', (done) => {
+      chai.request(server)
+      .post('/api/v1/folders/1/links')
+      .send({
+        id: 7,
+        original_url: 'https://www.rottentomatoes.com/',
+        short_url: 'placeholder',
+      })
+      .end((err, res) => {
+        res.should.have.status(201);
+        res.body.should.be.a('number');
+        res.body.should.equal(7);
+
+        chai.request(server)
+        .get('/api/v1/folders/1/links')
+        .end((err, res) => {
+          res.should.have.status(200);
+          res.body.should.be.a('array');
+          res.body.length.should.equal(3);
+          res.body[2].should.have.property('id');
+          res.body[2].id.should.equal(7);
+          res.body[2].should.have.property('original_url');
+          res.body[2].original_url.should.equal('https://www.rottentomatoes.com/');
+          res.body[2].should.have.property('short_url');
+          res.body[2].short_url.should.equal('placeholder');
+          res.body[2].should.have.property('folder_id');
+          res.body[2].folder_id.should.equal(1);
+          done();
+        })
+      })
     });
   });
 });

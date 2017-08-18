@@ -38,13 +38,13 @@ app.route('/api/v1/folders/:id/links')
   .catch(error => res.status(404).json(error))
 })
 .post((req, res) => {
-  const link = Object.assign({}, req.body, { folder_id: req.params.id, short_url: 'test' });
+  const link = Object.assign({}, req.body, { folder_id: req.params.id, short_url: 'placeholder' });
 
   db('links')
   .insert(link, 'id')
   .then(id => {
     const link_id = id[0];
-    return res.status(201).json({ link_id })
+    return res.status(201).json(link_id)
   })
   .catch(error => res.status(404).json(error))
 })

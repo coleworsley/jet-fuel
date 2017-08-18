@@ -44,7 +44,6 @@ const handleNewFolderSubmit = e => {
 const handleLinkSubmit = e => {
   e.preventDefault();
 
-
   const original_url = $('#url-input').val();
   const folder_id = $('.folder-dropdown').val();
   const $urlInput = $('#url-input')
