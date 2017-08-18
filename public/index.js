@@ -1,5 +1,4 @@
 // Function declarations
-
 const fetchFolders = () => {
   fetch('api/v1/folders')
   .then(res => res.json())
@@ -90,7 +89,6 @@ const handleFolderDropdown = e => {
     $('.new-folder-form').removeClass('form-hidden')
   }
 }
-
 
 // Page Load
 fetchFolders();
