@@ -10,7 +10,7 @@ const folderButton = folder => `<button class="folder" value=${folder.id}>${fold
 const folderDropdown = folder => `<option value=${folder.id}>${folder.name}</option>`;
 const createFolder = link => `
   <div class="link">
-    <a value=${link.id} href="api/v1/links/${link.id}" id="link">http://uniqueid:${link.id}</a>
+    <a value=${link.id} href="api/v1/links/${link.id}" id="link">jetfuel:${link.id}</a>
     <p>Date Created: ${link.created_at}</p>
   </div>`
 
@@ -69,6 +69,8 @@ const handleFolderClick = e => {
   $(e.target).toggleClass('active-folder');
   $('.link-container').empty();
   $('#links-title').text(e.target.textContent);
+  $('.folder-dropdown').val(e.target.value);
+  handleFolderDropdown(e);
 
   fetch(`api/v1/folders/${e.target.value}/links`)
   .then(res => res.json())

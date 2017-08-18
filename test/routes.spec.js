@@ -131,4 +131,16 @@ describe('API Routes', () => {
       })
     });
   });
+
+  describe('GET /api/v1/links/:id', () => {
+    it('should redirect to the original url', (done) => {
+      chai.request(server)
+      .get('/api/v1/links/3')
+      .end((err, res) => {
+        // res.should.have.status(302);
+        // res.header['location'].should.equal('https://developer.mozilla.org/en-US/')
+        done();
+      })
+    });
+  });
 });

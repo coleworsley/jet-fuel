@@ -14,17 +14,23 @@ app.route('/api/v1/folders')
   .select()
   .then(folders => res.status(200).json(folders))
   .catch(error => res.status(404).json(error))
-// TODO: add error for duplicate also add to DB Migration
 })
 .post((req, res) => {
+  const folder = req.body
+
+  for (let requiredParam of ['name']) {
+    if (!req.body[requiredParam]) {
+      return res.status(422).json(`Missing required parameter ${requiredParam}`);
+    }
+  }
+  // TODO: add error for duplicate also add to DB Migration
   db('folders')
-  .insert(req.body, 'id')
+  .insert(folder, 'id')
   .then(id => res.status(201).json(id[0]))
   .catch(error => res.status(500).json(error))
 })
 
-app.route('/api/v1/folders/:id/links')
-.get((req, res) => {
+app.get('/api/v1/folders/:id/links', (req, res) => {
   db('links')
   .select()
   .where('folder_id', req.params.id)
@@ -37,15 +43,17 @@ app.route('/api/v1/folders/:id/links')
   })
   .catch(error => res.status(404).json(error))
 })
-.post((req, res) => {
-  const link = Object.assign({}, req.body, { folder_id: req.params.id, short_url: 'placeholder' });
 
+app.post('/api/v1/folders/:id/links', (req, res) => {
+  console.log('in post')
+  const link = Object.assign({}, req.body, {
+    folder_id: parseInt(req.params.id),
+    short_url: 'placeholder'
+  });
+  console.log(link);
   db('links')
   .insert(link, 'id')
-  .then(id => {
-    const link_id = id[0];
-    return res.status(201).json(link_id)
-  })
+  .then(id => res.status(201).json(id[0]))
   .catch(error => res.status(404).json(error))
 })
 
@@ -54,7 +62,7 @@ app.route('/api/v1/links/:id')
   db('links')
   .select()
   .where('id', req.params.id)
-  .then(link => res.redirect(link[0].original_url))
+  .then(link => res.status(302).redirect(link[0].original_url))
   .catch(error => res.status(404).json(error))
 })
 
