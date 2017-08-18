@@ -8,11 +8,11 @@ exports.up = function(knex, Promise) {
 
     knex.schema.createTable('links', function(table) {
       table.increments('id').primary();
-      table.timestamps(true, true);
       table.string('original_url');
       table.string('short_url');
       table.integer('folder_id').unsigned();
       table.foreign('folder_id').references('folders.id')
+      table.timestamps(true, true);
 
     })
   ])

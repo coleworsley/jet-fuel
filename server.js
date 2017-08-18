@@ -8,15 +8,15 @@ const db = require('./knex')
 app.use(bodyParser.json());
 app.use(express.static('public'));
 
-app.route('/api/v1/folders')
-.get((req, res) => {
+app.get('/api/v1/folders', (req, res) => {
   db('folders')
   .select()
   .then(folders => res.status(200).json(folders))
   .catch(error => res.status(404).json(error))
 })
-.post((req, res) => {
-  const folder = req.body
+
+app.post('/api/v1/folders', (req, res) => {
+  const folder = req.body;
 
   for (let requiredParam of ['name']) {
     if (!req.body[requiredParam]) {
@@ -50,11 +50,17 @@ app.post('/api/v1/folders/:id/links', (req, res) => {
     folder_id: parseInt(req.params.id),
     short_url: 'placeholder'
   });
-  console.log(link);
-  db('links')
-  .insert(link, 'id')
-  .then(id => res.status(201).json(id[0]))
-  .catch(error => res.status(404).json(error))
+  db('folders').select().then((data) => {
+    console.log(data)
+    console.log(link);
+    db('links')
+    .insert(link, 'id')
+    .then(id => res.status(201).json(id[0]))
+    .catch(error => {
+      console.log('why the fuck is there an error?');
+      res.status(404).json(error)
+    })
+  })
 })
 
 app.route('/api/v1/links/:id')
