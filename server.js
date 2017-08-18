@@ -3,15 +3,10 @@ const app = express();
 const port = (process.env.PORT || 3000);
 const path = require('path');
 const bodyParser = require('body-parser');
-const moment = require('moment');
-
-const env = process.env.NODE_ENV || 'development';
-const config = require('./knexfile')[env];
-const db = require('knex')(config);
+const db = require('./knex')
 
 app.use(bodyParser.json());
 app.use(express.static('public'));
-
 
 app.route('/api/v1/folders')
 .get((req, res) => {

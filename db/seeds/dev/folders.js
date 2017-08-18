@@ -52,36 +52,9 @@ const links = [
   },
 ]
 
-
-const insertData = (table, knex, obj) => {
-  return knex(table).insert(obj)
-}
-
-// const createFolder = (knex, {id, name}) => {
-//   return knex('folders').insert({
-//     id,
-//     name,
-//   });
-// }
-
-
-
-
 exports.seed = function(knex, Promise) {
-  return Promise.all([
-    knex('links').del(),
-    knex('folders').del(),
-  ])
-  .then(() => {
-    return Promise.all(folders.map(folder => {
-      console.log(folder);
-      return insertData('folders', knex, folder);
-    }))
-  })
-  .then((folders) => {
-    console.log(folders);
-    return Promise.all(links.map(link => {
-      return insertData('links', knex, link)
-    }))
-  })
+  return      knex('links').del()
+  .then(() => knex('folders').del())
+  .then(() => Promise.all(folders.map(folder => knex('folders').insert(folder))))
+  .then(() => Promise.all(links.map(link => knex('links').insert(link))))
 };
