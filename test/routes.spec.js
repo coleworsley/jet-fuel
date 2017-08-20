@@ -74,7 +74,45 @@ describe('API Routes', () => {
         });
       });
     });
+
+    it('should return an error if the parameters are not met', (done) => {
+      chai.request(server)
+      .post('/api/v1/folders')
+      .send({
+        id: 4,
+        folder: 'this should\'t work',
+      })
+      .end((err, res) => {
+        res.should.have.status(422);
+        res.body.should.equal('Missing required parameter name');
+        done();
+      })
+    })
+
+  it('should return an error if there\'s a duplication', (done) => {
+    const body = {
+      name: 'Duplication',
+    }
+
+    chai.request(server)
+    .post('/api/v1/folders')
+    .send(body)
+    .end((err, res) => {
+      res.should.have.status(201);
+      res.body.should.be.a('number');
+
+      chai.request(server)
+      .post('/api/v1/folders')
+      .send(body)
+      .end((err, res) => {
+        res.should.have.status(409)
+        res.body.detail.should.equal('Key (name)=(Duplication) already exists.')
+        done();
+      })
+    })
   });
+});
+
 
   describe('GET /api/v1/folders/:id/links', () => {
     it('should get all the links in a folder', (done) => {
@@ -126,8 +164,8 @@ describe('API Routes', () => {
           res.body[2].should.have.property('folder_id');
           res.body[2].folder_id.should.equal(1);
           done();
-        })
-      })
+        });
+      });
     });
   });
 
@@ -136,8 +174,9 @@ describe('API Routes', () => {
       chai.request(server)
       .get('/api/v1/links/3')
       .end((err, res) => {
-        // res.should.have.status(302);
-        // res.header['location'].should.equal('https://developer.mozilla.org/en-US/')
+        res.should.have.status(200);
+        res.type.should.equal('text/html');
+        res.redirects[0].should.equal('https://developer.mozilla.org/en-US/')
         done();
       })
     });

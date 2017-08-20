@@ -23,11 +23,11 @@ app.post('/api/v1/folders', (req, res) => {
       return res.status(422).json(`Missing required parameter ${requiredParam}`);
     }
   }
-  // TODO: add error for duplicate also add to DB Migration
+
   db('folders')
   .insert(folder, 'id')
   .then(id => res.status(201).json(id[0]))
-  .catch(error => res.status(500).json(error))
+  .catch(error => res.status(409).json(error))
 })
 
 app.get('/api/v1/folders/:id/links', (req, res) => {
@@ -53,9 +53,7 @@ app.post('/api/v1/folders/:id/links', (req, res) => {
     db('links')
     .insert(link, 'id')
     .then(id => res.status(201).json(id[0]))
-    .catch(error => {
-      res.status(404).json(error)
-    })
+    .catch(error => res.status(404).json(error))
   })
 })
 
@@ -64,7 +62,9 @@ app.route('/api/v1/links/:id')
   db('links')
   .select()
   .where('id', req.params.id)
-  .then(link => res.status(302).redirect(link[0].original_url))
+  .then(link => {
+    res.status(302).redirect(link[0].original_url)
+  })
   .catch(error => res.status(404).json(error))
 })
 
