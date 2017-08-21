@@ -21,10 +21,7 @@ describe('Client Routes', () => {
 
 describe('API Routes', () => {
   before(done => {
-    knex.migrate.rollback()
-    .then(() => knex.migrate.latest())
-    .then(() => done())
-    })
+    knex.migrate.latest().then(() => done())
   });
 
   beforeEach(done => {
@@ -93,20 +90,24 @@ describe('API Routes', () => {
     })
 
   it('should return an error if there\'s a duplication', (done) => {
-    const body = {
-      name: 'Duplication',
-    }
+    const name = 'Duplication';
 
     chai.request(server)
     .post('/api/v1/folders')
-    .send(body)
+    .send({
+      name,
+      id: 5
+    })
     .end((err, res) => {
       res.should.have.status(201);
       res.body.should.be.a('number');
 
       chai.request(server)
       .post('/api/v1/folders')
-      .send(body)
+      .send({
+        name,
+        id: 6
+      })
       .end((err, res) => {
         res.should.have.status(409)
         res.body.detail.should.equal('Key (name)=(Duplication) already exists.')
