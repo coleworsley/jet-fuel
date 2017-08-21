@@ -75,7 +75,8 @@ const handleFolderClick = e => {
   fetch(`api/v1/folders/${e.target.value}/links`)
   .then(res => res.json())
   .then(links => {
-    $('.link-container').append(links.map(link => createFolder(link)));
+    // $('.link-container').append(links.map(link => createFolder(link)));
+    links.map(link => $(createFolder(link)).appendTo('.link-container').show('slow'));
   })
   .catch(error => {
     $('.link-container').append(`<p>There was an error</p>`)
@@ -99,4 +100,4 @@ fetchFolders();
 $('#new-folder-submit').on('click', handleNewFolderSubmit);
 $('#url-submit').on('click', handleLinkSubmit);
 $('.folder-container').on('click', '.folder', handleFolderClick);
-$('.folder-dropdown').on('change', handleFolderDropdown)
+$('.folder-dropdown').on('change', handleFolderDropdown);
