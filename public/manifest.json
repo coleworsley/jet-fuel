@@ -13,5 +13,9 @@
       "sizes": "512x512",
       "type": "image/png"
     }
-  ]
+  ],
+  "background_color": "#FAFAFA",
+  "theme_color": "#E95B26",
+  "display": "standalone",
+  "orientation": "portrait"
 }
