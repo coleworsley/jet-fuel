@@ -2,5 +2,5 @@
   "short_name": "JW",
   "name": "Jet-Fuel",
   "start_url": "index.html?launcher=true",
-  "icon": "./images/rocket-icon.png"
+  "icon": "./images/rocket.png"
 }
