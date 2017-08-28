@@ -49,6 +49,6 @@ const links = [
 exports.seed = function(knex, Promise) {
   return      knex('links').del()
   .then(() => knex('folders').del())
-  .then(() => Promise.all(folders.map(folder =>  knex('folders').insert(folder))))
+  .then(() => Promise.all(folders.map(folder => knex('folders').insert(folder, '*'))))
   .then((ids) => Promise.all(links.map(link => knex('links').insert(link))))
 };
