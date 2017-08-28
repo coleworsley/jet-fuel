@@ -5,6 +5,15 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const db = require('./knex')
 
+
+const requireHTTPS = (req, res, next) => {
+  if (!req.secure) {
+    return res.redirect(`https://${req.headers.host}${req.url}`);
+  }
+  next();
+}
+
+app.use(requireHTTPS)
 app.use(bodyParser.json());
 app.use(express.static('public'));
 
