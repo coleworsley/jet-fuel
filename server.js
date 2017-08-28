@@ -7,10 +7,10 @@ const db = require('./knex')
 
 
 const requireHTTPS = (req, res, next) => {
-  if (!req.secure) {
-    return res.redirect(`https://${req.headers.host}${req.url}`);
+  if (req.secure) {
+    return next();
   }
-  next();
+  return res.redirect(`https://${req.headers.host}${req.url}`, 301);
 }
 
 app.use(requireHTTPS)
