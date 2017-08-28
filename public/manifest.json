@@ -2,5 +2,16 @@
   "short_name": "JW",
   "name": "Jet-Fuel",
   "start_url": "index.html?launcher=true",
-  "icon": "./images/rocket.png"
+  "icon": [
+    {
+      "src": "/images/rocket.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/images/rocket-icon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
 }
