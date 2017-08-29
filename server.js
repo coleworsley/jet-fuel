@@ -7,13 +7,18 @@ const db = require('./knex')
 
 
 const requireHTTPS = (req, res, next) => {
-  if (req.secure) {
+  if (req.headers.host === 'localhost:3000') {
     return next();
   }
-  return res.redirect(`https://${req.headers.host}${req.url}`, 301);
+
+  if (req.headers['x-forwarded-proto'] != 'https') {
+    return res.redirect(301, 'https://' + req.headers.host + req.url);
+  }
+  // return res.redirect(`https://${req.headers.host}${req.url}`);
+  return next();
 }
 
-app.use(requireHTTPS)
+app.use(requireHTTPS);
 app.use(bodyParser.json());
 app.use(express.static('public'));
 
